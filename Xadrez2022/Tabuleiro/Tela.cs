@@ -15,6 +15,10 @@ namespace tabuleiro
                     {
                         Console.Write(" _");
                     }
+                    else
+                    {
+                        Console.Write(" " + tab.peca(i,j));
+                    }
                 }
                 Console.WriteLine();
             }
