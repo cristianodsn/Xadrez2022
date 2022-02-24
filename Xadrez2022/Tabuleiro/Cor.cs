@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Xadrez2022.Tabuleiro
+﻿namespace tabuleiro
 {
-    class Cor
+    enum Cor
     {
+        Branca,
+        Preta,
+        Azu,
+        Vermelho,
+        Amarelo,
+        Laranja,
     }
 }
