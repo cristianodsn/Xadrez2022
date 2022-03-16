@@ -27,6 +27,10 @@ namespace tabuleiro
 
         public void colocarPeca(Peca peca, Posicao posicao)
         {
+            if (existePeca(posicao))
+            {
+                throw new TabuleiroException("Já existe uma peça nessa posição.");
+            }
             pecas[posicao.linha, posicao.coluna] = peca;
         }
 
@@ -51,7 +55,7 @@ namespace tabuleiro
         public bool existePeca(Posicao posicao)
         {
             validarPosicao(posicao);
-            return peca(posicao) != null; //Retornar nulo se não hover peça no campo.
+            return peca(posicao) != null;
         }
     }
 }
