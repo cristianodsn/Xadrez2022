@@ -32,11 +32,24 @@ namespace tabuleiro
                 throw new TabuleiroException("Já existe uma peça nessa posição.");
             }
             pecas[posicao.linha, posicao.coluna] = peca;
+            peca.posicao = posicao;
+        }
+
+        public Peca removerPeca(Posicao pos)
+        {
+            if (peca(pos) == null)
+            {
+                return null;
+            }
+            Peca aux = peca(pos);
+            aux.posicao = null;
+            pecas[pos.linha, pos.coluna] = null;
+            return aux;
         }
 
         public bool posicaoValida(Posicao posicao)
         {
-            if (posicao.linha < 0 || posicao.linha >= this.Linhas || posicao.coluna < 0 
+            if (posicao.linha < 0 || posicao.linha >= this.Linhas || posicao.coluna < 0
                 || posicao.coluna >= this.Colunas)
             {
                 return false;
@@ -46,7 +59,7 @@ namespace tabuleiro
 
         public void validarPosicao(Posicao posicao)
         {
-            if(!posicaoValida(posicao))
+            if (!posicaoValida(posicao))
             {
                 throw new TabuleiroException("Posição inválida.");
             }

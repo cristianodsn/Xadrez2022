@@ -9,14 +9,19 @@ namespace Xadrez2022
         {
             try
             {
-
-                Tabuleiro tab = new Tabuleiro(8, 8);
-                tab.colocarPeca(new Torre(Cor.Preta), new Posicao(0, 0));
-                tab.colocarPeca(new Torre(Cor.Preta), new Posicao(1, 3));
-                tab.colocarPeca(new Rei(Cor.Preta), new Posicao(2, 4));
-                tab.colocarPeca(new Rei(Cor.Branca), new Posicao(3, 4));
-
-                Tela.imprimirTabuleito(tab);
+                PartidaXadrez partida = new PartidaXadrez();
+                while (!partida.fimDeJogo)
+                {
+                    Console.Clear();
+                    Tela.imprimirTabuleito(partida.tabuleiro);
+                    Console.WriteLine("Origem: ");
+                    Posicao origem = partida.lerPosicaoXadrez().toPosicao();
+                    Console.WriteLine(origem);
+                    Console.WriteLine("Destino: ");
+                    Posicao destino = partida.lerPosicaoXadrez().toPosicao();
+                    Console.WriteLine(destino);
+                    partida.executarMovimento(origem, destino);
+                }
             }
 
             catch (TabuleiroException e)

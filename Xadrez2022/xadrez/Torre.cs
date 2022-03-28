@@ -6,7 +6,7 @@ namespace xadrez
     class Torre : Peca
     {
 
-        public Torre(Cor cor) : base(cor) { }
+        public Torre(Tabuleiro tab, Cor cor) : base(tab, cor) { }
 
         public override string ToString()
         {

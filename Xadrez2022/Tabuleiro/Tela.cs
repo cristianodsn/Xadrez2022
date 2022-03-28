@@ -1,5 +1,6 @@
 ﻿using System;
 using tabuleiro;
+using xadrez;
 
 namespace tabuleiro
 {
@@ -7,12 +8,12 @@ namespace tabuleiro
     {
         public static void imprimirTabuleito(Tabuleiro tab)
         {
-            for(int i = 0; i < tab.Linhas; i++)
+            for (int i = 0; i < tab.Linhas; i++)
             {
                 Console.Write(8 - i);
                 for (int j = 0; j < tab.Colunas; j++)
                 {
-                    if(tab.peca(i,j) == null)
+                    if (tab.peca(i, j) == null)
                     {
                         Console.Write(" _");
                     }
@@ -28,9 +29,9 @@ namespace tabuleiro
 
         static public void imprimirPeca(Peca peca)
         {
-            if(peca.cor == Cor.Branca)
+            if (peca.cor == Cor.Branca)
             {
-                Console.Write(peca);
+                Console.Write(" " + peca);
             }
             else
             {
@@ -39,6 +40,6 @@ namespace tabuleiro
                 Console.Write(" " + peca);
                 Console.ResetColor();
             }
-        }
+        }       
     }
 }
