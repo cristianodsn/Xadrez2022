@@ -14,12 +14,15 @@ namespace Xadrez2022
                 {
                     Console.Clear();
                     Tela.imprimirTabuleito(partida.tabuleiro);
-                    Console.WriteLine("Origem: ");
+                    Console.Write("Origem: ");
+
                     Posicao origem = partida.lerPosicaoXadrez().toPosicao();
-                    Console.WriteLine(origem);
-                    Console.WriteLine("Destino: ");
+                    bool[,] aux = partida.tabuleiro.peca(origem).movimentosPossiveis();
+                    Console.Clear();
+                    Tela.imprimirTabuleito(partida.tabuleiro, aux);
+
+                    Console.Write("Destino: ");
                     Posicao destino = partida.lerPosicaoXadrez().toPosicao();
-                    Console.WriteLine(destino);
                     partida.executarMovimento(origem, destino);
                 }
             }

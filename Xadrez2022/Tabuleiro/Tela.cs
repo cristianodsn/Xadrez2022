@@ -13,14 +13,26 @@ namespace tabuleiro
                 Console.Write(8 - i);
                 for (int j = 0; j < tab.Colunas; j++)
                 {
-                    if (tab.peca(i, j) == null)
+                    imprimirPeca(tab.peca(i,j));
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine("  A B C D E F G H");
+        }
+
+        public static void imprimirTabuleito(Tabuleiro tab, bool [,] mat)
+        {
+            for (int i = 0; i < tab.Linhas; i++)
+            {
+                Console.Write(8 - i);
+                for (int j = 0; j < tab.Colunas; j++)
+                {
+                    if (mat[i, j])
                     {
-                        Console.Write(" _");
+                        Console.BackgroundColor = ConsoleColor.Cyan;
                     }
-                    else
-                    {
-                        imprimirPeca(tab.peca(i, j));
-                    }
+                    imprimirPeca(tab.peca(i, j));
+                    Console.ResetColor();
                 }
                 Console.WriteLine();
             }
@@ -29,17 +41,25 @@ namespace tabuleiro
 
         static public void imprimirPeca(Peca peca)
         {
-            if (peca.cor == Cor.Branca)
+
+            if (peca == null)
             {
-                Console.Write(" " + peca);
+                Console.Write(" _");
             }
             else
             {
-                ConsoleColor aux = Console.ForegroundColor;
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.Write(" " + peca);
-                Console.ResetColor();
-            }
+                if (peca.cor == Cor.Branca)
+                {
+                    Console.Write(" " + peca);
+                }
+                else
+                {
+                    ConsoleColor aux = Console.ForegroundColor;
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.Write(" " + peca);
+                    Console.ResetColor();
+                }
+            }           
         }       
     }
 }

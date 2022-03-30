@@ -35,15 +35,15 @@ namespace tabuleiro
             peca.posicao = posicao;
         }
 
-        public Peca removerPeca(Posicao pos)
+        public Peca removerPeca(Posicao p)
         {
-            if (peca(pos) == null)
+            if (peca(p) == null)
             {
                 return null;
             }
-            Peca aux = peca(pos);
+            Peca aux = peca(p);
             aux.posicao = null;
-            pecas[pos.linha, pos.coluna] = null;
+            pecas[p.linha, p.coluna] = null;
             return aux;
         }
 
