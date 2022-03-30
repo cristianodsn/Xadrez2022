@@ -21,12 +21,57 @@ namespace xadrez
             colocarPecas();
         }
 
-        public void executarMovimento(Posicao origem, Posicao Destino)
-        {            
+        public void executarMovimento(Posicao origem, Posicao destino)
+        {           
             Peca aux = tabuleiro.removerPeca(origem);
             aux.incrementarQuantidadeMovimento();
-            Peca pecaCapturada = tabuleiro.removerPeca(Destino);
-            tabuleiro.colocarPeca(aux, Destino);
+            Peca pecaCapturada = tabuleiro.removerPeca(destino);
+            tabuleiro.colocarPeca(aux, destino);
+        }
+
+        public void validarPosicaoOrigem(Posicao origem)
+        {
+            tabuleiro.validarPosicao(origem);
+
+            if (tabuleiro.peca(origem) == null)
+            {
+                throw new TabuleiroException("Não há peça nessa posição!");
+            }
+            if(tabuleiro.peca(origem).cor != JogadorAtual)
+            {
+                throw new TabuleiroException("Peça inválida!");
+            }
+            if (!tabuleiro.peca(origem).exiteMovimentoPossivel())
+            {
+                throw new TabuleiroException("Não há um movimento possível para essa peça!");
+            }
+        }
+        
+        public void validarPosicaoDestino(Posicao origem, Posicao destino)
+        {
+            if (!tabuleiro.peca(origem).podeMoverPara(destino))
+            {
+                throw new TabuleiroException("Posição de destino inválida");
+            }
+        }
+
+        public void realizarJogada(Posicao origem, Posicao destino)
+        {
+            executarMovimento(origem, destino);
+            turno++;
+            mudarJogador();
+        }
+
+        private void mudarJogador()
+        {
+            if(JogadorAtual == Cor.Branca)
+            {
+                JogadorAtual = Cor.Preta;
+            }
+            else
+            {
+                JogadorAtual = Cor.Branca;
+            }
         }
 
         public PosicaoXadrez lerPosicaoXadrez()

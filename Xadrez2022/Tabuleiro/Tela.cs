@@ -29,7 +29,7 @@ namespace tabuleiro
                 {
                     if (mat[i, j])
                     {
-                        Console.BackgroundColor = ConsoleColor.Cyan;
+                        Console.BackgroundColor = ConsoleColor.DarkGray;
                     }
                     imprimirPeca(tab.peca(i, j));
                     Console.ResetColor();

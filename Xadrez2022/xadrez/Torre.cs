@@ -45,7 +45,7 @@ namespace xadrez
 
             //abaixo
             aux.definirPosicao(posicao.linha +1, posicao.coluna);
-            while (podeMover(aux))
+            while (tab.posicaoValida(aux) && podeMover(aux))
             {
                 mat[aux.linha, aux.coluna] = true;
                 if (tab.peca(aux) != null && tab.peca(aux).cor != cor)

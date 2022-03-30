@@ -26,5 +26,29 @@ namespace tabuleiro
 
         public abstract bool[,] movimentosPossiveis();
 
+        public bool exiteMovimentoPossivel()
+        {
+            bool[,] mat = movimentosPossiveis();
+            
+            for(int i = 0; i<mat.GetLength(0); i++)
+            {
+                for(int j =0; j<mat.GetLength(1); j++)
+                {
+                    if (mat[i, j])
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+
+        public bool podeMoverPara(Posicao destino)
+        {
+            bool[,] mat = movimentosPossiveis();
+            return mat[destino.linha, destino.coluna];
+        }
     }
 }
