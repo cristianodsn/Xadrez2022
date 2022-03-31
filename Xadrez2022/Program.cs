@@ -14,12 +14,7 @@ namespace Xadrez2022
                 {
                     try
                     {
-                        Console.Clear();
-                        Tela.imprimirTabuleito(partida.tabuleiro);
-                        Console.WriteLine();
-                        Console.WriteLine("Turno atual: " + partida.turno);
-                        Console.WriteLine("Aguardando Jogada: " + partida.JogadorAtual);
-                        Console.WriteLine();
+                        Tela.imprimirPartida(partida);
 
                         Console.Write("Origem: ");
                         Posicao origem = partida.lerPosicaoXadrez().toPosicao();
