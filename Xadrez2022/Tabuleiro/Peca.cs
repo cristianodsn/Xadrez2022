@@ -23,6 +23,10 @@ namespace tabuleiro
         {
             quantidadeMovimento++;
         }
+        public void decrementarQuantidadeMovimento()
+        {
+            quantidadeMovimento--;
+        }
 
         public abstract bool[,] movimentosPossiveis();
 

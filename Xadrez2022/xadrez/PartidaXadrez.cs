@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using tabuleiro;
 
 namespace xadrez
@@ -13,6 +12,7 @@ namespace xadrez
         public bool fimDeJogo { get; private set; }
         private HashSet<Peca> pEmJogo;
         private HashSet<Peca> pCapturadas;
+        public bool xeque { get; private set; }
 
         public PartidaXadrez()
         {
@@ -23,20 +23,54 @@ namespace xadrez
             pEmJogo = new HashSet<Peca>();
             pCapturadas = new HashSet<Peca>();
             colocarPecas();
-           
+
         }
 
-        public void executarMovimento(Posicao origem, Posicao destino)
-        {           
+        public Peca executarMovimento(Posicao origem, Posicao destino)
+        {
             Peca aux = tabuleiro.removerPeca(origem);
             aux.incrementarQuantidadeMovimento();
             Peca pecaCapturada = tabuleiro.removerPeca(destino);
             tabuleiro.colocarPeca(aux, destino);
-            if(pecaCapturada != null)
+            if (pecaCapturada != null)
             {
                 pCapturadas.Add(pecaCapturada);
             }
+            return pecaCapturada;
         }
+        public void desfazMovimento(Posicao origem, Posicao destino, Peca capturada)
+        {
+            Peca aux = tabuleiro.removerPeca(destino);
+            aux.decrementarQuantidadeMovimento();
+            tabuleiro.colocarPeca(aux, origem);
+            if (capturada != null)
+            {
+                tabuleiro.colocarPeca(capturada, destino);
+                pCapturadas.Remove(capturada);
+            }
+        }
+
+        public void realizarJogada(Posicao origem, Posicao destino)
+        {
+            Peca capturada = executarMovimento(origem, destino);
+
+            if (estaEmXeque(JogadorAtual))
+            {
+                desfazMovimento(origem, destino, capturada);
+                throw new TabuleiroException("Você não pode se colocar em Xeque!");
+            }
+            if (estaEmXeque(adversaria(JogadorAtual)))
+            {
+                xeque = true;
+            }
+            else
+            {
+                xeque = false;
+            }
+            turno++;
+            mudarJogador();
+        }
+
 
         public void validarPosicaoOrigem(Posicao origem)
         {
@@ -46,7 +80,7 @@ namespace xadrez
             {
                 throw new TabuleiroException("Não há peça nessa posição!");
             }
-            if(tabuleiro.peca(origem).cor != JogadorAtual)
+            if (tabuleiro.peca(origem).cor != JogadorAtual)
             {
                 throw new TabuleiroException("Peça inválida!");
             }
@@ -55,7 +89,7 @@ namespace xadrez
                 throw new TabuleiroException("Não há um movimento possível para essa peça!");
             }
         }
-        
+
         public void validarPosicaoDestino(Posicao origem, Posicao destino)
         {
             if (!tabuleiro.peca(origem).podeMoverPara(destino))
@@ -64,16 +98,9 @@ namespace xadrez
             }
         }
 
-        public void realizarJogada(Posicao origem, Posicao destino)
-        {
-            executarMovimento(origem, destino);
-            turno++;
-            mudarJogador();
-        }
-
         private void mudarJogador()
         {
-            if(JogadorAtual == Cor.Branca)
+            if (JogadorAtual == Cor.Branca)
             {
                 JogadorAtual = Cor.Preta;
             }
@@ -83,10 +110,57 @@ namespace xadrez
             }
         }
 
+        private Cor adversaria(Cor cor)
+        {
+            if (cor == Cor.Branca)
+            {
+                return Cor.Preta;
+            }
+            else
+            {
+                return Cor.Branca;
+            }
+        }
+
+        private Peca rei(Cor cor)
+        {
+
+            foreach (Peca p in pecasEmJogo(cor))
+            {
+                if (p is Rei)
+                {
+
+                    return p;
+                }
+            }
+
+            return null;
+        }
+
+        private bool estaEmXeque(Cor cor)
+        {
+            Peca Rei = rei(cor);
+            if (Rei == null)
+            {
+                throw new TabuleiroException("Não há um rei dessa cor na partida!!!");
+            }
+
+            foreach (Peca p in pecasEmJogo(adversaria(cor)))
+            {
+                bool[,] mat = p.movimentosPossiveis();
+                if (mat[Rei.posicao.linha, Rei.posicao.coluna])
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public HashSet<Peca> pecasCapturadas(Cor cor)
         {
             HashSet<Peca> aux = new HashSet<Peca>();
-            foreach(Peca p in pCapturadas)
+            foreach (Peca p in pCapturadas)
             {
                 if (p.cor == cor)
                 {
@@ -98,13 +172,13 @@ namespace xadrez
         public HashSet<Peca> pecasEmJogo(Cor cor)
         {
             HashSet<Peca> aux = new HashSet<Peca>();
-            foreach(Peca p in pEmJogo)
+            foreach (Peca p in pEmJogo)
             {
-                if(p.cor == cor)
+                if (p.cor == cor)
                 {
                     aux.Add(p);
                 }
-            }            
+            }
             aux.ExceptWith(pecasCapturadas(cor));
             return aux;
         }
@@ -113,7 +187,7 @@ namespace xadrez
         {
             string posicao = Console.ReadLine();
             char coluna = posicao[0];
-            int linha = int.Parse(posicao[1]+"");
+            int linha = int.Parse(posicao[1] + "");
             return new PosicaoXadrez(linha, coluna);
         }
 
@@ -125,7 +199,7 @@ namespace xadrez
 
         void colocarPecas()
         {
-            colocarNovaPeca(new Rei(tabuleiro, Cor.Branca),'d',1);
+            colocarNovaPeca(new Rei(tabuleiro, Cor.Branca), 'd', 1);
             colocarNovaPeca(new Torre(tabuleiro, Cor.Branca), 'c', 1);
             colocarNovaPeca(new Torre(tabuleiro, Cor.Branca), 'e', 1);
             colocarNovaPeca(new Torre(tabuleiro, Cor.Branca), 'd', 2);

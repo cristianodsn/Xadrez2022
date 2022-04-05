@@ -17,7 +17,11 @@ namespace tabuleiro
             Console.WriteLine();
             Console.WriteLine("Turno atual: " + partida.turno);
             Console.WriteLine("Aguardando Jogada: " + partida.JogadorAtual);
-            Console.WriteLine();
+            if (partida.xeque)
+            {
+                Console.WriteLine("XEQUE!");
+            }
+            Console.WriteLine();          
         }
 
         static void imprimirPecasCapturadas(PartidaXadrez partida)
@@ -25,7 +29,7 @@ namespace tabuleiro
             Console.WriteLine("Peças capturadas: ");
 
             Console.Write("Brancas ");
-            HashSet<Peca> aux1 = partida.pecasCapturadas(Cor.Branca);
+            HashSet<Peca> aux1 = partida.pecasCapturadas(Cor.Branca);                                                     
             imprimirConjunto(aux1);
             Console.WriteLine();
 
