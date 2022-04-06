@@ -33,6 +33,8 @@ namespace Xadrez2022
                         Console.WriteLine(e.Message);
                         Console.ReadLine();
                     }
+
+                    Tela.imprimirPartida(partida);
                 }
             }
 

@@ -59,6 +59,7 @@ namespace xadrez
                 desfazMovimento(origem, destino, capturada);
                 throw new TabuleiroException("Você não pode se colocar em Xeque!");
             }
+
             if (estaEmXeque(adversaria(JogadorAtual)))
             {
                 xeque = true;
@@ -67,8 +68,17 @@ namespace xadrez
             {
                 xeque = false;
             }
-            turno++;
-            mudarJogador();
+
+            if (xequeMate(adversaria(JogadorAtual)))
+            {
+                fimDeJogo = true;
+            }
+            else
+            {
+                turno++;
+                mudarJogador();
+            }
+          
         }
 
 
@@ -92,7 +102,9 @@ namespace xadrez
 
         public void validarPosicaoDestino(Posicao origem, Posicao destino)
         {
-            if (!tabuleiro.peca(origem).podeMoverPara(destino))
+            tabuleiro.validarPosicao(destino);
+
+            if (!tabuleiro.peca(origem).movimentosPossivel(destino))
             {
                 throw new TabuleiroException("Posição de destino inválida");
             }
@@ -155,6 +167,42 @@ namespace xadrez
             }
 
             return false;
+        }
+
+        public bool xequeMate(Cor cor)
+        {
+            if (!estaEmXeque(adversaria(JogadorAtual)))
+            {
+                return false;
+            }
+
+            foreach(Peca p in pecasEmJogo(JogadorAtual))
+            {
+                bool[,] mat = p.movimentosPossiveis();
+
+                for(int i = 0; i < tabuleiro.Linhas; i++)
+                {
+                    for(int j = 0; j < tabuleiro.Colunas; j++)
+                    {
+                        if (mat[i, j])
+                        {
+                            Posicao origem = p.posicao;
+                            Posicao destino = new Posicao(i, j);
+
+                            Peca cap = executarMovimento(origem, destino);
+                            bool xequeTeste = estaEmXeque(JogadorAtual);
+                            desfazMovimento(origem, destino, cap);
+                            if (xequeTeste)
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            return true;
         }
 
         public HashSet<Peca> pecasCapturadas(Cor cor)
