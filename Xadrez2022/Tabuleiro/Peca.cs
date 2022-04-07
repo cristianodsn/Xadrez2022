@@ -49,7 +49,7 @@ namespace tabuleiro
         }
 
 
-        public bool movimentosPossivel(Posicao destino)
+        public bool movimentoPossivel(Posicao destino)
         {
             bool[,] mat = movimentosPossiveis();
             return mat[destino.linha, destino.coluna];

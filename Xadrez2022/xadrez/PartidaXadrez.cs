@@ -104,7 +104,7 @@ namespace xadrez
         {
             tabuleiro.validarPosicao(destino);
 
-            if (!tabuleiro.peca(origem).movimentosPossivel(destino))
+            if (!tabuleiro.peca(origem).movimentoPossivel(destino))
             {
                 throw new TabuleiroException("Posição de destino inválida");
             }
@@ -190,7 +190,7 @@ namespace xadrez
                             Posicao destino = new Posicao(i, j);
 
                             Peca cap = executarMovimento(origem, destino);
-                            bool xequeTeste = estaEmXeque(JogadorAtual);
+                            bool xequeTeste = estaEmXeque(adversaria(JogadorAtual));
                             desfazMovimento(origem, destino, cap);
                             if (xequeTeste)
                             {
@@ -247,20 +247,40 @@ namespace xadrez
 
         void colocarPecas()
         {
-            colocarNovaPeca(new Rei(tabuleiro, Cor.Branca), 'd', 1);
-            colocarNovaPeca(new Torre(tabuleiro, Cor.Branca), 'c', 1);
-            colocarNovaPeca(new Torre(tabuleiro, Cor.Branca), 'e', 1);
-            colocarNovaPeca(new Torre(tabuleiro, Cor.Branca), 'd', 2);
-            colocarNovaPeca(new Torre(tabuleiro, Cor.Branca), 'e', 2);
-            colocarNovaPeca(new Torre(tabuleiro, Cor.Branca), 'c', 2);
+            //transformar em método
+            colocarNovaPeca(new Rei(tabuleiro, Cor.Branca), 'e', 1);
+            colocarNovaPeca(new Torre(tabuleiro, Cor.Branca), 'a', 1);
+            colocarNovaPeca(new Torre(tabuleiro, Cor.Branca), 'h', 1);
+            colocarNovaPeca(new Cavalo(tabuleiro, Cor.Branca), 'b', 1);
+            colocarNovaPeca(new Cavalo(tabuleiro, Cor.Branca), 'g', 1);
+            colocarNovaPeca(new Bispo(tabuleiro, Cor.Branca), 'c', 1);
+            colocarNovaPeca(new Torre(tabuleiro, Cor.Branca), 'f', 1);
+            colocarNovaPeca(new Dama(tabuleiro, Cor.Branca), 'd', 1);
+            colocarNovaPeca(new Peao(tabuleiro, Cor.Branca), 'a', 2);
+            colocarNovaPeca(new Peao(tabuleiro, Cor.Branca), 'b', 2);
+            colocarNovaPeca(new Peao(tabuleiro, Cor.Branca), 'c', 2);
+            colocarNovaPeca(new Peao(tabuleiro, Cor.Branca), 'd', 2);
+            colocarNovaPeca(new Peao(tabuleiro, Cor.Branca), 'e', 2);
+            colocarNovaPeca(new Peao(tabuleiro, Cor.Branca), 'f', 2);
+            colocarNovaPeca(new Peao(tabuleiro, Cor.Branca), 'g', 2);
+            colocarNovaPeca(new Peao(tabuleiro, Cor.Branca), 'h', 2);
 
-
-            colocarNovaPeca(new Rei(tabuleiro, Cor.Preta), 'd', 8);
-            colocarNovaPeca(new Torre(tabuleiro, Cor.Preta), 'c', 8);
-            colocarNovaPeca(new Torre(tabuleiro, Cor.Preta), 'e', 8);
-            colocarNovaPeca(new Torre(tabuleiro, Cor.Preta), 'd', 7);
-            colocarNovaPeca(new Torre(tabuleiro, Cor.Preta), 'e', 7);
-            colocarNovaPeca(new Torre(tabuleiro, Cor.Preta), 'c', 7);
+            colocarNovaPeca(new Rei(tabuleiro, Cor.Preta), 'e', 8);
+            colocarNovaPeca(new Torre(tabuleiro, Cor.Preta), 'a', 8);
+            colocarNovaPeca(new Torre(tabuleiro, Cor.Preta), 'h', 8);
+            colocarNovaPeca(new Cavalo(tabuleiro, Cor.Preta), 'b', 8);
+            colocarNovaPeca(new Cavalo(tabuleiro, Cor.Preta), 'g', 8);
+            colocarNovaPeca(new Bispo(tabuleiro, Cor.Preta), 'c', 8);
+            colocarNovaPeca(new Torre(tabuleiro, Cor.Preta), 'f', 8);
+            colocarNovaPeca(new Dama(tabuleiro, Cor.Preta), 'd', 8);
+            colocarNovaPeca(new Peao(tabuleiro, Cor.Preta), 'a', 7);
+            colocarNovaPeca(new Peao(tabuleiro, Cor.Preta), 'b', 7);
+            colocarNovaPeca(new Peao(tabuleiro, Cor.Preta), 'c', 7);
+            colocarNovaPeca(new Peao(tabuleiro, Cor.Preta), 'd', 7);
+            colocarNovaPeca(new Peao(tabuleiro, Cor.Preta), 'e', 7);
+            colocarNovaPeca(new Peao(tabuleiro, Cor.Preta), 'f', 7);
+            colocarNovaPeca(new Peao(tabuleiro, Cor.Preta), 'g', 7);
+            colocarNovaPeca(new Peao(tabuleiro, Cor.Preta), 'h', 7);
         }
 
     }
