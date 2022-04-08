@@ -36,7 +36,25 @@ namespace xadrez
             {
                 pCapturadas.Add(pecaCapturada);
             }
+
+            //# Roque Pequeno
+            if (aux is Rei && destino.coluna == origem.coluna + 2)
+            {
+                Peca torre = tabuleiro.removerPeca(new Posicao(destino.linha, destino.coluna + 1));
+                torre.incrementarQuantidadeMovimento();
+                tabuleiro.colocarPeca(torre, new Posicao(origem.linha, origem.coluna + 1));
+            }
+            //# Roque Grande
+            if (aux is Rei && destino.coluna == origem.coluna - 2)
+            {
+                Peca torre = tabuleiro.removerPeca(new Posicao(origem.linha, origem.coluna - 4));
+                torre.incrementarQuantidadeMovimento();
+                tabuleiro.colocarPeca(torre, new Posicao(origem.linha, origem.coluna - 1));
+            }
+
             return pecaCapturada;
+
+
         }
         public void desfazMovimento(Posicao origem, Posicao destino, Peca capturada)
         {
@@ -47,6 +65,22 @@ namespace xadrez
             {
                 tabuleiro.colocarPeca(capturada, destino);
                 pCapturadas.Remove(capturada);
+            }
+
+            //# Roque Pequeno
+            if (aux is Rei && destino.coluna == origem.coluna + 2)
+            {
+                Peca torre = tabuleiro.removerPeca(new Posicao(origem.linha, origem.coluna + 1));
+                torre.decrementarQuantidadeMovimento();
+                tabuleiro.colocarPeca(torre, new Posicao(aux.posicao.linha, aux.posicao.coluna + 3));
+            }
+
+            //# Roque Grande
+            if (aux is Rei && destino.coluna == origem.coluna - 2)
+            {
+                Peca torre = tabuleiro.removerPeca(new Posicao(origem.linha, origem.coluna - 1));
+                torre.decrementarQuantidadeMovimento();
+                tabuleiro.colocarPeca(torre, new Posicao(aux.posicao.linha, aux.posicao.coluna - 4));
             }
         }
 
@@ -78,7 +112,7 @@ namespace xadrez
                 turno++;
                 mudarJogador();
             }
-          
+
         }
 
 
@@ -149,7 +183,7 @@ namespace xadrez
             return null;
         }
 
-        private bool estaEmXeque(Cor cor)
+        public bool estaEmXeque(Cor cor)
         {
             Peca Rei = rei(cor);
             if (Rei == null)
@@ -176,13 +210,13 @@ namespace xadrez
                 return false;
             }
 
-            foreach(Peca p in pecasEmJogo(JogadorAtual))
+            foreach (Peca p in pecasEmJogo(JogadorAtual))
             {
                 bool[,] mat = p.movimentosPossiveis();
 
-                for(int i = 0; i < tabuleiro.Linhas; i++)
+                for (int i = 0; i < tabuleiro.Linhas; i++)
                 {
-                    for(int j = 0; j < tabuleiro.Colunas; j++)
+                    for (int j = 0; j < tabuleiro.Colunas; j++)
                     {
                         if (mat[i, j])
                         {
@@ -248,13 +282,13 @@ namespace xadrez
         void colocarPecas()
         {
             //transformar em método
-            colocarNovaPeca(new Rei(tabuleiro, Cor.Branca), 'e', 1);
+            colocarNovaPeca(new Rei(tabuleiro, Cor.Branca, this), 'e', 1);
             colocarNovaPeca(new Torre(tabuleiro, Cor.Branca), 'a', 1);
             colocarNovaPeca(new Torre(tabuleiro, Cor.Branca), 'h', 1);
             colocarNovaPeca(new Cavalo(tabuleiro, Cor.Branca), 'b', 1);
             colocarNovaPeca(new Cavalo(tabuleiro, Cor.Branca), 'g', 1);
             colocarNovaPeca(new Bispo(tabuleiro, Cor.Branca), 'c', 1);
-            colocarNovaPeca(new Torre(tabuleiro, Cor.Branca), 'f', 1);
+            colocarNovaPeca(new Bispo(tabuleiro, Cor.Branca), 'f', 1);
             colocarNovaPeca(new Dama(tabuleiro, Cor.Branca), 'd', 1);
             colocarNovaPeca(new Peao(tabuleiro, Cor.Branca), 'a', 2);
             colocarNovaPeca(new Peao(tabuleiro, Cor.Branca), 'b', 2);
@@ -265,13 +299,13 @@ namespace xadrez
             colocarNovaPeca(new Peao(tabuleiro, Cor.Branca), 'g', 2);
             colocarNovaPeca(new Peao(tabuleiro, Cor.Branca), 'h', 2);
 
-            colocarNovaPeca(new Rei(tabuleiro, Cor.Preta), 'e', 8);
+            colocarNovaPeca(new Rei(tabuleiro, Cor.Preta, this), 'e', 8);
             colocarNovaPeca(new Torre(tabuleiro, Cor.Preta), 'a', 8);
             colocarNovaPeca(new Torre(tabuleiro, Cor.Preta), 'h', 8);
             colocarNovaPeca(new Cavalo(tabuleiro, Cor.Preta), 'b', 8);
             colocarNovaPeca(new Cavalo(tabuleiro, Cor.Preta), 'g', 8);
             colocarNovaPeca(new Bispo(tabuleiro, Cor.Preta), 'c', 8);
-            colocarNovaPeca(new Torre(tabuleiro, Cor.Preta), 'f', 8);
+            colocarNovaPeca(new Bispo(tabuleiro, Cor.Preta), 'f', 8);
             colocarNovaPeca(new Dama(tabuleiro, Cor.Preta), 'd', 8);
             colocarNovaPeca(new Peao(tabuleiro, Cor.Preta), 'a', 7);
             colocarNovaPeca(new Peao(tabuleiro, Cor.Preta), 'b', 7);
