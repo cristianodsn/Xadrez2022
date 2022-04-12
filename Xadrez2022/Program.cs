@@ -33,7 +33,11 @@ namespace Xadrez2022
                         Console.WriteLine(e.Message);
                         Console.ReadLine();
                     }
-
+                    catch (SystemException)
+                    {
+                        Console.WriteLine("Erro ao inserir uma nova posição!");
+                        Console.ReadLine();
+                    }
                     Tela.imprimirPartida(partida);
                 }
             }
@@ -42,7 +46,7 @@ namespace Xadrez2022
             {
                 Console.WriteLine(e.Message);
                 Console.ReadLine();
-            }
+            }           
         }
     }
 }

@@ -36,7 +36,6 @@ namespace xadrez
             bool[,] mat = new bool[tab.Linhas, tab.Colunas];
             Posicao aux = new Posicao(0, 0);
 
-            //Essas duas condicionais poderiam ser convertidas em métodos.
             if (cor == Cor.Branca) 
             {
                 aux.definirPosicao(posicao.linha - 1, posicao.coluna);

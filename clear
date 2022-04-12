@@ -1,4 +1,82 @@
-[33mcommit 3cae82ce82d5e9b756ac531b10373b5411d939b2[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+[33mcommit dbc2dce652cece47d4133c368778ac8c384b1b1f[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Cristiano <cristiano_castiel@hotmail.com>
+Date:   Tue Apr 12 17:32:11 2022 -0300
+
+    Implementação do en passant e promoção do peão.
+
+[33mcommit f3913a0ad8ea45126d4ca781ffadee507fe0dd0e[m
+Author: Cristiano <cristiano_castiel@hotmail.com>
+Date:   Thu Apr 7 22:18:20 2022 -0300
+
+    Jogada especial, roque pequeno e roque grande
+
+[33mcommit cc8b9d62d3b2cb698990fc70523a76c9f857ef93[m
+Author: Cristiano <cristiano_castiel@hotmail.com>
+Date:   Wed Apr 6 22:51:11 2022 -0300
+
+    Acrescentando as demais peças
+
+[33mcommit ce54df279bb4fc84e552d9b5bba4df5bfc52e46c[m
+Author: Cristiano <cristiano_castiel@hotmail.com>
+Date:   Wed Apr 6 12:51:46 2022 -0300
+
+    Correção: mudando o nome do método para movimentoPossivel
+
+[33mcommit 42e07d0b7d48f63befb0785f128a12efda992b4a[m
+Author: Cristiano <cristiano_castiel@hotmail.com>
+Date:   Tue Apr 5 13:53:38 2022 -0300
+
+    Implementando a verificação de xeque
+
+[33mcommit b24f3d8645e7dc524969e88e784204983a3987b8[m
+Author: Cristiano <cristiano_castiel@hotmail.com>
+Date:   Thu Mar 31 19:43:39 2022 -0300
+
+    Controlando as peças capturadas
+
+[33mcommit 3c3c2a6e0a7b2af61dd30161e4e925a2a33f8733[m
+Author: Cristiano <cristiano_castiel@hotmail.com>
+Date:   Wed Mar 30 18:58:09 2022 -0300
+
+    Implementando as restrições de movimento
+
+[33mcommit c2df4e6a273e62c0c3e8ba7de390a570aa8bf001[m
+Author: Cristiano <cristiano_castiel@hotmail.com>
+Date:   Tue Mar 29 21:10:47 2022 -0300
+
+    Testes iniciais com movimentos possiveis das peças
+
+[33mcommit 383941b3537e262cff7526b781710fe059b1c854[m
+Author: Cristiano <cristiano_castiel@hotmail.com>
+Date:   Mon Mar 28 18:48:14 2022 -0300
+
+    Fazendo os primeiros testes de movimentação
+
+[33mcommit 1447c49e5a69004e0d3a37e83b5f48043f042576[m
+Author: Cristiano Nascimento <cristiano_castiel@hotmail.com>
+Date:   Wed Mar 16 09:56:10 2022 -0300
+
+    Melhorando a implementação do método imprimir tabuleiro
+
+[33mcommit b2b61385bdd56138740009b20c1ce1174f671b7d[m
+Author: Cristiano Nascimento <cristiano_castiel@hotmail.com>
+Date:   Wed Mar 16 09:02:55 2022 -0300
+
+    Criando a classe posição xadrez.
+
+[33mcommit f8cc1b3305ed29763b4fad6fa6c0f349d21d988b[m
+Author: Cristiano Nascimento <cristiano_castiel@hotmail.com>
+Date:   Wed Mar 16 08:12:39 2022 -0300
+
+    Tratando erros com exceção personalizada
+
+[33mcommit 19803e889b250844edc7bbd34cf054af75f9ca35[m
+Author: Cristiano Nascimento <cristiano_castiel@hotmail.com>
+Date:   Wed Mar 16 07:19:52 2022 -0300
+
+    Retornando o projeto
+
+[33mcommit 3cae82ce82d5e9b756ac531b10373b5411d939b2[m
 Author: Cristiano Castiel <cristianoct03@gmail.com>
 Date:   Thu Feb 24 13:43:26 2022 -0300
 
