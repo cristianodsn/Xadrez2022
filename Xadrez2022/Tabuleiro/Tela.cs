@@ -31,7 +31,13 @@ namespace tabuleiro
                 Console.WriteLine("XEQUEMATE!!!");
                 Console.WriteLine("Vencedor: " + partida.JogadorAtual);
             }
-            Console.WriteLine();          
+            Console.WriteLine();
+            if(partida.vulneravelEmPassant != null)
+            {
+                Console.WriteLine(partida.vulneravelEmPassant);
+                Console.WriteLine(partida.vulneravelEmPassant.posicao);
+            }
+            
         }
 
         static void imprimirPecasCapturadas(PartidaXadrez partida)
